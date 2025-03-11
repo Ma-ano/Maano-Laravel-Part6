@@ -26,7 +26,7 @@ class StudentController extends Controller
 
 
     function list(){
-        $studentData = Student::all();
+        $studentData = Student::paginate(5);
         return view('list-student',['students'=>$studentData]);
     }
 
@@ -60,4 +60,21 @@ class StudentController extends Controller
             return "Student details are not updated";
         }
     }
+
+    function search(Request $request){
+        $studentData= Student::where('name','like',"%$request->search%")->get();
+        return view('list-student',['students'=>$studentData]);
+    }
+
+
+    function deleteMultiple(Request $request){
+        $result=Student::destroy($request->ids);
+        if($result){
+            return redirect('list');
+        }
+        else{
+            return "selected not deleted";
+        }
+    }
+
 }

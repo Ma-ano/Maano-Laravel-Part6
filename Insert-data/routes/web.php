@@ -24,10 +24,10 @@ Route::post('delete-multi',[StudentController::class,'deleteMultiple']);
 
 
 
-Route::view('upload','upload');
-Route::post('upload',[ImageController::class,'upload']);
+// Route::view('upload','upload');
+// Route::post('upload',[ImageController::class,'upload']);
 
-Route::get('list',[ImageController::class,'list']);
+// Route::get('list',[ImageController::class,'list']);
 
 Route::view('home','home');
 Route::view('about','about');

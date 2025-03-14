@@ -26,8 +26,8 @@ class StudentController extends Controller
 
 
     function list(){
-        $studentData = Student::paginate(5);
-        return view('list-student',['students'=>$studentData]);
+        $students = Student::paginate(10); // Fetch 10 students per page
+        return view('list-student', compact('students'));
     }
 
 
@@ -62,9 +62,9 @@ class StudentController extends Controller
     }
 
     function search(Request $request){
-        $studentData= Student::where('name','like',"%$request->search%")->get();
-        return view('list-student',['students'=>$studentData]);
-    }
+        $studentData = Student::where('name', 'like', "%$request->search%")->paginate(10); // Use paginate() instead of get()
+        return view('list-student', ['students' => $studentData]);
+    }  
 
 
     function deleteMultiple(Request $request){
